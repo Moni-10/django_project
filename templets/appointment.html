@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-title bg-1">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block text-center">
+                    <span class="text-white">Book your Seat</span>
+                    <h1 class="text-capitalize mb-5 text-lg">Appointment</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="appointment section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="mt-3">
+                    <div class="feature-icon mb-3">
+                        <i class="icofont-support text-lg"></i>
+                    </div>
+                    <span class="h3">Call for an Emergency Service!</span>
+                    <h2 class="text-color mt-3">+84 789 1256</h2>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="appointment-wrap mt-5 mt-lg-0 pl-lg-5">
+                    <h2 class="mb-2 title-color">Book an appointment</h2>
+                    <p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit. Iste dolorum atque similique praesentium soluta.</p>
+                    <!-- Form to book appointment -->
+                    <form class="appointment-form" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <!-- Hidden inputs for department name and doctor name -->
+                            {% for item in my_list %}
+                            <input type="hidden" name="a_department_name" value="{{ item.department_name }}">
+                            <input type="hidden" name="a_doctor_name" value="{{ item.doc_name }}">
+                            {% endfor %}
+                            <!-- Date input -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input name="a_date" id="date" type="date" class="form-control" placeholder="yyyy-mm-dd">
+                                </div>
+                            </div>
+                            <!-- Time input -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <select name="a_time" id="time" class="form-control">
+                                        <option value="">Select Timing</option>
+                                        <option value="9 to 12 pm">9 to 12 pm</option>
+                                        <option value="12 to 3 pm">12 to 3 pm</option>
+                                        <option value="3 to 6 pm">3 to 6 pm</option>
+                                        <option value="6 to 9 pm">6 to 9 pm</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Full Name input -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input name="full_name" id="name" type="text" class="form-control" placeholder="Full Name">
+                                </div>
+                            </div>
+                            <!-- Phone Number input -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Phone Number">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Message input -->
+                        <div class="form-group mb-4">
+                            <textarea name="message" id="message" class="form-control" rows="6" placeholder="Your Message"></textarea>
+                        </div>
+                        <!-- Submit button -->
+                        <input type="submit" value="Make Appointment" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
